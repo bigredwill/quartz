@@ -1,1 +1,4 @@
-article about sharing diy bagels with folks in the desert
+I have been making bagels in the desert
+
+[[recipes/bagels|bagels]] contains the bagel recipe that I use.
+
