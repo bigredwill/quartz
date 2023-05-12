@@ -2,6 +2,7 @@
 title: Bagels
 ---
 > Bagels are not a dumpling - they are finished with dry heat.
+> 	source: https://archive.nytimes.com/cityroom.blogs.nytimes.com/2010/05/28/nocturnalist-gathering-the-dumpling-family/
 
 ![[images/bagels.jpeg]]
 
@@ -9,7 +10,7 @@ I have been on a bagel journey. Inspired by cultural tradition, love of bread an
 
 The recipe I use is simple. This post is to get it online and shareable from outside email. The recipe was shared by my father, who got it from some internet site.
 
-The biggest tip I have is to use good flour and ingredients. Good input == good output.
+> The biggest tip I have is to use good flour and ingredients. Good input == good output.
 
 
 
