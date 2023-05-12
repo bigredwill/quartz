@@ -3,7 +3,7 @@ title: Bagels
 ---
 > Bagels are not a dumpling - they are finished with dry heat.
 
-![[bagels.jpeg]]
+![[images/bagels.jpeg]]
 
 I have been on a bagel journey. Inspired by cultural tradition, love of bread and baking, and a tightening of the wallet. It's cheap relative to the 4 plus dollars required to go out for a simple bagel with cream cheese (shoutout to all you bagel makers, though, the public needs bagels.)
 
