@@ -1,3 +1,6 @@
+---
+title: Bagels
+---
 > Bagels are not a dumpling - they are finished with dry heat.
 
 ![[bagels.jpeg]]
