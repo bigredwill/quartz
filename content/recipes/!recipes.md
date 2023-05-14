@@ -1,3 +1,0 @@
-Recipes
-- [[recipes/bagels|bagels]]
-- 

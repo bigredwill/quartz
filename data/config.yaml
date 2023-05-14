@@ -1,8 +1,8 @@
 name: Will Simons
 enableToc: true
-openToc: false
+openToc: true
 enableLinkPreview: true
-enableLatex: true
+enableLatex: false
 enableCodeBlockTitle: true
 enableCodeBlockCopy: true
 enableCallouts: true
@@ -18,9 +18,9 @@ search:
   operandApiKey: "REPLACE-WITH-YOUR-OPERAND-API-KEY"
   operandIndexId: "REPLACE-WITH-YOUR-OPERAND-INDEX-ID"
 description:
-  Simons dev
+  Simons development
 page_title:
-  "🪴 simons dev"
+  "simons development garden 🪴"
 links:
   - link_name: Instagram
     link: https://instagram.com/cuppanoodle

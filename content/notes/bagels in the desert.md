@@ -1,6 +1,10 @@
-# Bagels in the desert
+---
+title: Make bagels in the desert
+description: Make bagels in the desert with a primitive oven.
+---
 
-I have been making bagels in the desert
+Here is the recipe:
+[[recipes/bagels|bagels]]
 
-[[recipes/bagels|bagels]] contains the bagel recipe that I use.
+2023 Mars College
 
