@@ -1,6 +1,9 @@
 ---
 title: Bagel recipe
 tocExpand: true
+tags:
+- food
+- bagels
 ---
 > Bagels are not a dumpling - they are finished with dry heat.
 > 	source: https://archive.nytimes.com/cityroom.blogs.nytimes.com/2010/05/28/nocturnalist-gathering-the-dumpling-family/
