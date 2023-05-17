@@ -21,54 +21,27 @@
     {{- if .HasChildren }}
         <li class="hasChildren">
           <label for="{{ .Name | safeHTML }}">
-        <input type="checkbox" id="{{ .Name | safeHTML }}"/>
-        <style>
-            /* todo: move this to general styles */
-            li.hasChildren {
-                list-style: upper-roman;
-            }
+          <input type="checkbox" id="{{ .Name | safeHTML }}"/>
+          <style>
+              #{{ .Name | safeHTML }} {
+                  display: none;
+              }
 
-            .childMenu {
-                overflow: hidden;
-                max-height: 0;
-                padding: 0;
-                margin: 0 auto;
-                -webkit-transition: all 0.3s ease;
-                opacity: 0;
-                font-size: .8em;
-            }
-
-            #{{ .Name | safeHTML }} {
-                display: none;
-            }
-
-            #{{ .Name | safeHTML }}:checked ~ .childMenu {
-                max-height: 1000px;
-                overflow: visible;
-                opacity: 1;
-                padding: 4px 14px;
-                font-size: .8em;
-            }
-
-            .childMenu li {
-              position: relative;
-              list-style-type: none;
-            }
-
-            .childMenu li:hover::before {
-              background-color: var(--dark);
-            }
-
-            .childMenu li::before{
-              content: '';
-              width: 2px;
-              height: 100%;
-              position: absolute;
-              left: -10px;
-              background-color: var(--outlinegray);
-            }
-
-        </style>
+              #{{ .Name | safeHTML }} ~ a {
+                user-select: none;
+              }
+              
+              #{{ .Name | safeHTML }}:checked ~ .childMenu {
+                  /* Make height of menu height of children.
+                    Would likely need to change this if has sub menu
+                  */
+                  max-height: {{(.Children | len)}}00px;
+                  overflow: visible;
+                  opacity: 1;
+                  padding: 4px 14px;
+                  font-size: .8em;
+              }
+          </style>
     {{- else }}
         <li>
     {{- end}}
