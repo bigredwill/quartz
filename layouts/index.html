@@ -3,18 +3,24 @@
 {{ partial "head.html" . }}
 
 <body>
-{{partial "search.html" .}}
-<div class="singlePage">
-    <!-- Begin actual content -->
-    {{partial "header.html" .}}
-    <article>
+  {{partial "search.html" .}}
+  <div class="singlePage">
+    <div class="sidebar">
+      {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+    </div>
+    <div class="content">
+      <!-- Begin actual content -->
+      {{partial "header.html" .}}
+      <article>
         {{partial "toc.html" .}}
         {{partial "textprocessing.html" . }}
         {{if $.Site.Data.config.enableRecentNotes}}
-          {{partial "recent.html" . }}
+        {{partial "recent.html" . }}
         {{end}}
-    </article>
-    {{partial "footerIndex.html" .}}
-</div>
+      </article>
+      {{partial "footerIndex.html" .}}
+    </div>
+  </div>
 </body>
+
 </html>

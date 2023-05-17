@@ -3,32 +3,38 @@
 {{ partial "head.html" . }}
 
 <body>
-{{partial "search.html" .}}
-<div class="singlePage">
-    <!-- Begin actual content -->
-    {{partial "header.html" .}}
-    <article>
-      {{if .Title}}<h1>{{ .Title }}</h1>{{end}}
-      <p class="meta">
-        {{ i18n "last_updated" }} {{ partial "date-fmt.html" .}} 
+  {{partial "search.html" .}}
+  <div class="singlePage">
+    <div class="sidebar">
+      {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+    </div>
+    <div class="content">
+      <!-- Begin actual content -->
+      {{partial "header.html" .}}
+      <article>
+        {{if .Title}}<h1>{{ .Title }}</h1>{{end}}
+        <p class="meta">
+          {{ i18n "last_updated" }} {{ partial "date-fmt.html" .}}
           {{ partial "github.html" . }}
-      </p>
-      <ul class="tags">
+        </p>
+        <ul class="tags">
           {{ range (.GetTerms "tags") }}
           <li><a href="{{ .Permalink }}">
-          {{if (eq $.Site.Language.Lang "en")}}
-            {{ .LinkTitle | humanize }}
-          {{else}}
-            {{ .LinkTitle }}
-          {{end}}
+              {{if (eq $.Site.Language.Lang "en")}}
+              {{ .LinkTitle | humanize }}
+              {{else}}
+              {{ .LinkTitle }}
+              {{end}}
             </a>
-           </li>
+          </li>
           {{ end }}
-      </ul>
-      {{partial "toc.html" .}}
-      {{partial "textprocessing.html" . }}
-    </article>
-    {{partial "footer.html" .}}
-</div>
+        </ul>
+        {{partial "toc.html" .}}
+        {{partial "textprocessing.html" . }}
+      </article>
+      {{partial "footer.html" .}}
+    </div>
+  </div>
 </body>
+
 </html>

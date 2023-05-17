@@ -1,5 +1,9 @@
 ---
 title: Just Make Work
+menu:
+    main:
+        params:
+        parent: Notes
 tags:
 - process
 ---

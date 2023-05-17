@@ -1,6 +1,10 @@
 ---
 title: Bagel recipe
 tocExpand: true
+menu:
+    main:
+        params:
+        parent: Recipes
 tags:
 - food
 - bagels

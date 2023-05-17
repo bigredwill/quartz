@@ -12,6 +12,7 @@ enableContextualBacklinks: true
 enableRecentNotes: true
 enableGitHubEdit: false
 enableMermaid: true
+sectionPagesMenu: main
 GitHubLink: https://github.com/bigredwill/quartz/tree/hugo/content
 search:
   enableSemanticSearch: false
@@ -20,7 +21,7 @@ search:
 description:
   Simons development
 page_title:
-  "simons development garden 🪴"
+  "salmon research lab"
 links:
   - link_name: Instagram
     link: https://instagram.com/cuppanoodle

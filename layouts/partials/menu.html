@@ -1,0 +1,93 @@
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+
+{{- with index site.Menus $menuID }}
+  <nav>
+    <ul style="padding-left: 2px; list-style-type: disc;">
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+    </ul>
+  </nav>
+{{- end }}
+
+{{- define "partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $attrs := dict "href" .URL }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- if .HasChildren }}
+        <li class="hasChildren">
+          <label for="{{ .Name | safeHTML }}">
+        <input type="checkbox" id="{{ .Name | safeHTML }}"/>
+        <style>
+            /* todo: move this to general styles */
+            li.hasChildren {
+                list-style: upper-roman;
+            }
+
+            .childMenu {
+                overflow: hidden;
+                max-height: 0;
+                padding: 0;
+                margin: 0 auto;
+                -webkit-transition: all 0.3s ease;
+                opacity: 0;
+                font-size: .8em;
+            }
+
+            #{{ .Name | safeHTML }} {
+                display: none;
+            }
+
+            #{{ .Name | safeHTML }}:checked ~ .childMenu {
+                max-height: 1000px;
+                overflow: visible;
+                opacity: 1;
+                padding: 4px 14px;
+                font-size: .8em;
+            }
+
+            .childMenu li {
+              position: relative;
+              list-style-type: none;
+            }
+
+            .childMenu li:hover::before {
+              background-color: var(--dark);
+            }
+
+            .childMenu li::before{
+              content: '';
+              width: 2px;
+              height: 100%;
+              position: absolute;
+              left: -10px;
+              background-color: var(--outlinegray);
+            }
+
+        </style>
+    {{- else }}
+        <li>
+    {{- end}}
+    
+      <a
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}
+      >{{ or (T .Identifier) .Name | safeHTML }}</a>
+      {{- with .Children }}
+        <ul class="childMenu">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      {{- end }}
+      {{- if .HasChildren }}
+    </label>
+{{- end}}
+    </li>
+  {{- end }}
+{{- end }}
