@@ -2,8 +2,8 @@
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-  <nav>
-    <ul style="padding-left: 2px; list-style-type: disc;">
+  <nav class="menu">
+    <ul>
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -18,41 +18,26 @@
     {{- else if $page.HasMenuCurrent .Menu .}}
       {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
     {{- end }}
-    {{- if .HasChildren }}
-        <li class="hasChildren">
-          <label for="{{ .Name | safeHTML }}">
-          <input type="checkbox" id="{{ .Name | safeHTML }}"/>
-          <style>
-              #{{ .Name | safeHTML }} {
-                  display: none;
-              }
 
-              #{{ .Name | safeHTML }} ~ a {
-                user-select: none;
-              }
-              
-              #{{ .Name | safeHTML }}:checked ~ .childMenu {
-                  /* Make height of menu height of children.
-                    Would likely need to change this if has sub menu
-                  */
-                  max-height: {{(.Children | len)}}00px;
-                  overflow: visible;
-                  opacity: 1;
-                  padding: 4px 14px;
-                  font-size: .8em;
-              }
-          </style>
+    <!-- Opening Tag -->
+    {{- if .HasChildren }}
+      <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details -->
+      <!-- Details creates collapsing section -->
+        <details role="menu">
     {{- else }}
+      <!-- If no children, it's a list item -->
         <li>
     {{- end}}
-    
-      <a
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end }}
-        {{- end -}}
-      >{{ or (T .Identifier) .Name | safeHTML }}</a>
+     <!-- Summary is used to display the text for <details> -->
+      <summary>
+        <a tabindex="0"
+          {{- range $k, $v := $attrs }}
+            {{- with $v }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end }}
+          {{- end -}}
+        >{{ or (T .Identifier) .Name | safeHTML }}</a>
+      </summary>
       {{- with .Children }}
         <ul class="childMenu">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
@@ -60,7 +45,15 @@
       {{- end }}
       {{- if .HasChildren }}
     </label>
-{{- end}}
-    </li>
+    {{- end}}
+
+    <!-- Closing Tag -->
+    {{- if .HasChildren }}
+      </details>
+    {{- else }}
+      </li>
+    {{- end }}
+
+
   {{- end }}
 {{- end }}

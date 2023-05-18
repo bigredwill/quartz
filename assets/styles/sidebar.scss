@@ -1,18 +1,31 @@
+.sidebar {
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.menu {
+  padding-left: 2px;
+  list-style-type: disc;
+  font-size: .9em;
+}
+
+.menu > ul {
+  padding: 0;
+  cursor: pointer;
+}
 
 li.hasChildren {
-    list-style: none;
+  list-style: none;
 }
 
 .childMenu {
-    overflow: hidden;
-    max-height: 0;
-    margin: 0 auto;
-    -webkit-transition: opacity 0.3s ease;
-    opacity: 0;
-    font-size: .8em;
-    padding: 4px 14px;
+  padding-left: 24px;
+  font-size: .9em;
 }
 
+.childMenu li a[aria-current="page"] {
+  color: var(--primary);
+}
 .childMenu li {
   position: relative;
   list-style-type: none;
@@ -25,7 +38,7 @@ li.hasChildren {
 .childMenu li::before{
   content: '';
   width: 2px;
-  height: 100%;
+  height: 90%;
   position: absolute;
   left: -10px;
   background-color: var(--outlinegray);

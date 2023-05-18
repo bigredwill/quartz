@@ -17,19 +17,24 @@ menu:
 
 Quartz helps enable publishing of notes to the web, and is an alternative to Obsidian's Publish offering.  One thing it lacks is a sidebar menu listing all content. Here I describe the process for reproducing this functionality in a minimal way.
 
+## Summary
+We will configure a dropdown style menu like Obsidian has. It will not be automatically populated by file structure, but will be auto-populated by defining some frontmatter in your markdown files.
+
 ## Demo
-![[images/sidebar.mp4|sidebar]]
+![[images/sidebar-28.mp4|sidebar]]
 
 ## Create `sidebar.html` partial template
 Create the file: `layouts/partials/sidebar.html`
+
+We use the [`<details>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) to create a dropdown.
 
 ```html
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-  <nav>
-    <ul style="padding-left: 2px; list-style-type: disc;">
+  <nav class="menu">
+    <ul>
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -44,41 +49,26 @@ Create the file: `layouts/partials/sidebar.html`
     {{- else if $page.HasMenuCurrent .Menu .}}
       {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
     {{- end }}
-    {{- if .HasChildren }}
-        <li class="hasChildren">
-          <label for="{{ .Name | safeHTML }}">
-          <input type="checkbox" id="{{ .Name | safeHTML }}"/>
-          <style>
-              #{{ .Name | safeHTML }} {
-                  display: none;
-              }
 
-              #{{ .Name | safeHTML }} ~ a {
-                user-select: none;
-              }
-              
-              #{{ .Name | safeHTML }}:checked ~ .childMenu {
-                  /* Make height of menu height of children.
-                    Would likely need to change this if has sub menu
-                  */
-                  max-height: {{(.Children | len)}}00px;
-                  overflow: visible;
-                  opacity: 1;
-                  padding: 4px 14px;
-                  font-size: .8em;
-              }
-          </style>
+    <!-- Opening Tag -->
+    {{- if .HasChildren }}
+      <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details -->
+      <!-- Details creates collapsing section -->
+        <details role="menu">
     {{- else }}
+      <!-- If no children, it's a list item -->
         <li>
     {{- end}}
-    
-      <a
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end }}
-        {{- end -}}
-      >{{ or (T .Identifier) .Name | safeHTML }}</a>
+     <!-- Summary is used to display the text for <details> -->
+      <summary>
+        <a tabindex="0"
+          {{- range $k, $v := $attrs }}
+            {{- with $v }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end }}
+          {{- end -}}
+        >{{ or (T .Identifier) .Name | safeHTML }}</a>
+      </summary>
       {{- with .Children }}
         <ul class="childMenu">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
@@ -86,8 +76,16 @@ Create the file: `layouts/partials/sidebar.html`
       {{- end }}
       {{- if .HasChildren }}
     </label>
-{{- end}}
-    </li>
+    {{- end}}
+
+    <!-- Closing Tag -->
+    {{- if .HasChildren }}
+      </details>
+    {{- else }}
+      </li>
+    {{- end }}
+
+
   {{- end }}
 {{- end }}
 ```
@@ -103,6 +101,7 @@ Example modified `layouts/index.html`
 <body>
   {{partial "search.html" .}}
   <div class="singlePage">
+    <!-- Add your sidebar here. -->
     <div class="sidebar">
       {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
     </div>
@@ -124,38 +123,54 @@ Example modified `layouts/index.html`
 </html>
 ```
 
-
 ## Create `assets/styles/sidebar.scss`
+Here's some example CSS for the dropdown menu. It's styled similar to the Obsidian sidebar.
+
 ```scss
+.sidebar {
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.menu {
+  padding-left: 2px;
+  list-style-type: disc;
+  font-size: .9em;
+}
+
+.menu > ul {
+  padding: 0;
+  cursor: pointer;
+}
+
 li.hasChildren {
-	list-style: upper-roman;
+  list-style: none;
 }
 
 .childMenu {
-	overflow: hidden;
-	max-height: 0;
-	padding: 0;
-	margin: 0 auto;
-	opacity: 0;
-	font-size: .8em;
+  padding-left: 24px;
+  font-size: .9em;
 }
 
+.childMenu li a[aria-current="page"] {
+  color: var(--primary);
+}
 .childMenu li {
-	position: relative;
-	list-style-type: none;
+  position: relative;
+  list-style-type: none;
 }
 
 .childMenu li:hover::before {
-	background-color: var(--dark);
+  background-color: var(--dark);
 }
 
 .childMenu li::before{
-	content: '';
-	width: 2px;
-	height: 100%;
-	position: absolute;
-	left: -10px;
-	background-color: var(--outlinegray);
+  content: '';
+  width: 2px;
+  height: 90%;
+  position: absolute;
+  left: -10px;
+  background-color: var(--outlinegray);
 }
 ```
 
@@ -164,7 +179,7 @@ Unfortunately, this is not an automatic process. You must add pages to the Sideb
 
 For example, if we have a folder called "Notes", and a page called "Sidebar in Quartz", we would modify the `content/notes/Sidebar in Quartz.md` and add the following to metadata:
 
-```
+```md
 ---
 title: Sidebar in Quartz
 
