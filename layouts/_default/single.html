@@ -14,6 +14,9 @@
           {{ i18n "last_updated" }} {{ partial "date-fmt.html" .}}
           {{ partial "github.html" . }}
         </p>
+        <p class="meta">
+          {{ .WordCount }} words
+        </p>
         <ul class="tags">
           {{ range (.GetTerms "tags") }}
           <li><a href="{{ .Permalink }}">

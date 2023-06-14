@@ -27,5 +27,15 @@
   --highlighted: #574010;
 }
 
+dl {
+  font-family: var(--font-body);
+  color: var(--gray);
+  fill: var(--gray);
+  font-weight: revert;
+  margin: revert;
+  padding: revert;
+}
 
-
+dt {
+  font-weight: bold;
+}
