@@ -1,6 +1,6 @@
 ---
 title: Yes I'm an addict
-
+draft: true
 ---
 
 To recover I must admit: I am an addict. Specifically, content on screens.
