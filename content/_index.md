@@ -1,22 +1,43 @@
 ---
-title: salmon research lab
+title: Simons Development Labs
 enableToc: false
 ---
 
-> Gardens are a meeting point for the natural world and humans. They are places to nurture growth, experiment, and learn.
+ <style>
 
+    .singlePage {
+    padding: 0;
+    }
 
+    .wrapper {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    }
 
-<!-- ## Paths
-- [notes](/notes) - Doings, beings, musings
-- [recipes](/recipes) - Food -->
-<div class="gallery" style="width: 100%; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr)">
+    .pentagons {
+        position: fixed;
+        z-index: 1;
+    }
 
-![[images/salmon/00828-2031287505-salmon through a porthole, life acquatic with steve zissou, film photograph, black and white, film grain, highly detailed, maste(1).jpeg]]
+    article,
+    .content,
+    .singlePage {
+    height: 100%;
+    }
+</style>
+![[images/Pasted image 20230728163921.png]]
+<div class="wrapper">
+    <div class="pentagons">
+    </div>
+    <div></div>
+    <main>
+        <h1>Simons Development Labs</h1>
+        <p>We specialize in web development and simple solutions.</p>
+        <p>JavaScript, React, HTML, CSS, Node.js, TypeScript, and more.<br/>Fluent in the languages you use, capable in even more.</p>
 
-![[images/salmon/00836-3953688282-salmon through a porthole, life acquatic with steve zissou, film photograph, black and white, film grain, highly detailed, maste.png]]
+1. [[notes/index|Blog]]
+2. [[portfolio/index.md|Portfolio]]
 
-![[images/salmon/00835-3953688281-salmon through a porthole, life acquatic with steve zissou, film photograph, black and white, film grain, highly detailed, maste.png]]
-
-![[images/salmon/00831-2031287508-salmon through a porthole, life acquatic with steve zissou, film photograph, black and white, film grain, highly detailed, maste.png]]
+<p>Contact <a href="mailto:hello@simons.dev">hello@simons.dev</a> to get started.</p>
+</main>
 </div>
